@@ -1393,16 +1393,28 @@ void  __attribute__((noreturn)) AppMain(void)
 		}
 		WDT_HIT();
 
+#ifdef WITH_ISO14443a
+#ifdef WITH_ISO14443a_StandAlone
+              if (BUTTON_HELD(1000) > 0){
+                      Dbprintf("Snopping enabled !");
+                      SpinDelay(2000);
+                      SniffIso14443a(0);
+              }
+#endif
+#endif
+
 #ifdef WITH_LF
 #ifndef WITH_ISO14443a_StandAlone
 		if (BUTTON_HELD(1000) > 0)
-			SamyRun();
+                      Dbprintf("1");
+//			SamyRun();
 #endif
 #endif
 #ifdef WITH_ISO14443a
 #ifdef WITH_ISO14443a_StandAlone
 		if (BUTTON_HELD(1000) > 0)
-			StandAloneMode14a();
+                      Dbprintf("2");
+//			StandAloneMode14a();
 #endif
 #endif
 	}
